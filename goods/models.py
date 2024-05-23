@@ -6,7 +6,7 @@ class Category(models.Model):
     title = models.CharField(max_length=150)
 
     class Meta:
-        verbose_name = 'Категория'
+        verbose_name = 'Категорию'
         verbose_name_plural = 'Категории'
 
     def __str__(self):
@@ -23,6 +23,11 @@ class Brand(models.Model):
     def __str__(self):
         return self.title
 
+    def display_brand(self):
+        return ', '.join([ brand.title for brand in self.brand.all()[:3] ])
+
+    display_brand.short_description = 'brand'
+
 
 class Subcategory(models.Model):
     title = models.CharField(max_length=150)
@@ -30,7 +35,7 @@ class Subcategory(models.Model):
     brand = models.ManyToManyField(Brand, related_name='subcategor')
 
     class Meta:
-        verbose_name = 'Подкатегория'
+        verbose_name = 'Подкатегорию'
         verbose_name_plural = 'Подкатегории'
 
     def __str__(self):
@@ -49,6 +54,11 @@ class Type(models.Model):
     def __str__(self):
         return self.title
 
+    def display_brand(self):
+        return ', '.join([ brand.title for brand in self.brand.all()[:3] ])
+
+    display_brand.short_description = 'brand'
+
 
 class Goods(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Название')
@@ -65,6 +75,7 @@ class Goods(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Бренд')
 
     class Meta:
+        verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
 
     def __str__(self):
