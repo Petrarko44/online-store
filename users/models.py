@@ -22,7 +22,7 @@ class NewUser(AbstractUser):
         username = f'{self.first_name} {self.last_name}'
         return username
 
-# тут лежит ковыряние в админке 
+# тут лежит ковыряние в админке
 
 # class GoodsAdmin(admin.ModelAdmin):
 #     list_filter = ('title', 'category', 'vendor_code', 'price')
