@@ -3,7 +3,8 @@ from rest_framework import generics, viewsets
 from goods.models import Goods, Subcategory, Category, Type, Brand
 from goods.serializers import GoodsSerializer, SubcategorySerializer, CategorySerializer, TypeSerializer, \
     BrandSerializer
-
+from django_filters.rest_framework import DjangoFilterBackend
+from goods.filters import GoodsFilter
 
 # class GoodsAPIList(generics.ListCreateAPIView):
 #     queryset = Goods.objects.all()
@@ -16,6 +17,8 @@ from goods.serializers import GoodsSerializer, SubcategorySerializer, CategorySe
 class GoodsViewSet(viewsets.ModelViewSet):
     queryset = Goods.objects.all()
     serializer_class = GoodsSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = GoodsFilter
 
 # class SubcategoryAPIList(generics.ListCreateAPIView):
 #     queryset = Subcategory.objects.all()
