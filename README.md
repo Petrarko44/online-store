@@ -18,6 +18,6 @@ ___
   * delivery method
   * payment method
   * convenient delivery date and time
-* the store works for both authorized and unauthorized users
+* the store works for both authorized and non-authorized users
 
 

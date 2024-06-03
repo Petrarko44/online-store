@@ -32,7 +32,7 @@ class Brand(models.Model):
 class Subcategory(models.Model):
     title = models.CharField(max_length=150)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    brand = models.ManyToManyField(Brand, related_name='subcategor')
+    brand = models.ManyToManyField(Brand, related_name='subcategor', blank=True)
 
     class Meta:
         verbose_name = 'Подкатегорию'
