@@ -22,6 +22,8 @@ class NewUser(AbstractUser):
         username = f'{self.first_name} {self.last_name}'
         return username
 
+
+
 # тут лежит ковыряние в админке
 
 # class GoodsAdmin(admin.ModelAdmin):
