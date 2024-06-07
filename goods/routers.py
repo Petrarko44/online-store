@@ -1,5 +1,5 @@
 from rest_framework import routers
-from goods.views import GoodsViewSet, CategoryViewSet, SubcategoryViewSet, TypeViewSet, BrandViewSet
+from goods.views import CategoryViewSet, SubcategoryViewSet, TypeViewSet, BrandViewSet, GoodsViewSet
 
 
 router_goods = routers.SimpleRouter()

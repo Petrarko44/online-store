@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from users.models import NewUser
+
 
 
 class Category(models.Model):
@@ -73,6 +75,7 @@ class Goods(models.Model):
     discount = models.DecimalField(default=0.00, max_digits=4, decimal_places=2, verbose_name='Скидка в %')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Бренд')
+    user = models.ForeignKey(NewUser, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь')
 
     class Meta:
         verbose_name = 'Товар'
@@ -90,3 +93,10 @@ class Goods(models.Model):
         if self.quantity >= 1:
             return f'В наличии.'
         return f'Нет в наличии.'
+
+
+# class Spinning(Goods):
+#     # MATERIAL_TYPE = ['Углеволокно(карбон)', 'Стекловолокно', 'Композит']
+#     # material = models.TextChoices(blank=True, null=True, choices=MATERIAL_TYPE, verbose_name='Материал')
+#     material = models.TextChoices('Тип материала', 'Углеволокно(карбон), Стекловолокно, Композит')
+#     length = models.PositiveIntegerField(verbose_name='Длина')

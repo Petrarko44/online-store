@@ -3,6 +3,7 @@ from goods.models import Goods, Subcategory, Category, Type, Brand
 
 
 class GoodsSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Goods
         fields = '__all__'

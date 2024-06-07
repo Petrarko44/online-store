@@ -5,11 +5,16 @@ from goods.serializers import GoodsSerializer, SubcategorySerializer, CategorySe
     BrandSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from goods.filters import GoodsFilter
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAdminUser, IsAuthenticated
+from goods.permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 # class GoodsAPIList(generics.ListCreateAPIView):
 #     queryset = Goods.objects.all()
 #     serializer_class = GoodsSerializer
-#
+#     authentication_classes = [SessionAuthentication, BasicAuthentication]
+#     permission_class = (IsAuthenticatedOrReadOnly, )
+# #
 # class GoodsAPIDetail(generics.RetrieveUpdateDestroyAPIView):
 #     queryset = Goods.objects.all()
 #     serializer_class = GoodsSerializer
@@ -19,6 +24,8 @@ class GoodsViewSet(viewsets.ModelViewSet):
     serializer_class = GoodsSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = GoodsFilter
+    permission_classes = (IsAdminOrReadOnly,)
+    authentication_classes = [SessionAuthentication, BasicAuthentication]
 
 # class SubcategoryAPIList(generics.ListCreateAPIView):
 #     queryset = Subcategory.objects.all()
