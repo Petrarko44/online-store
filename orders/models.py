@@ -1,6 +1,11 @@
+import os
+import csv
+import json
+
 from django.db import models
+from django.conf import settings
+
 from goods.models import Goods
-from users.models import NewUser
 
 
 class OrderItemQuerySet(models.QuerySet):
@@ -13,9 +18,8 @@ class OrderItemQuerySet(models.QuerySet):
             return sum(cart.quantity for cart in self)
         return 0
 
-
 class Order(models.Model):
-    user = models.ForeignKey(NewUser, on_delete=models.SET_DEFAULT, null=True, blank=True, verbose_name='Пользователь',default=None)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_DEFAULT, null=True, blank=True, verbose_name='Пользователь',default=None)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания заказа')
     phone_number = models.CharField(max_length=9, verbose_name='Номер телефона')
     DELIVERY_METHOD = [

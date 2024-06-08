@@ -109,7 +109,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-En'
 
 TIME_ZONE = 'Europe/Moscow'
 
@@ -128,6 +128,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# AUTH_USER_MODEL = 'django.contrib.auth.models.User'
 AUTH_USER_MODEL = 'users.NewUser'
 
 REST_FRAMEWORK = {
