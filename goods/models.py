@@ -74,7 +74,7 @@ class Goods(models.Model):
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Цена')
     discount = models.DecimalField(default=0.00, max_digits=4, decimal_places=2, verbose_name='Скидка в %')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, verbose_name='Бренд')
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, verbose_name='Бренд')
     user = models.ForeignKey(NewUser, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь')
 
     class Meta:

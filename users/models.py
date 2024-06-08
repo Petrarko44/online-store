@@ -1,9 +1,8 @@
 from django.db import models
-from django.contrib import admin
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, Group, AbstractUser, UserManager
 from  django.contrib.auth.base_user import BaseUserManager
-#
-#
+
+
 class CustomUserManager(BaseUserManager):
     """
     Email is the default for authentication instead of the username
@@ -65,21 +64,3 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return self.email
 
-# тут лежит ковыряние в админке
-#
-# class GoodsAdmin(admin.ModelAdmin):
-#     list_filter = ('title', 'category', 'vendor_code', 'price')
-#     # fields = ['title', 'category', ('vendor_code', 'price')]
-#     fieldsets = (
-#         (None, {
-#             'fields': ('title', 'category', 'vendor_code', 'price')
-#         }),
-#         ('Полное описание', {
-#             'fields': ('description', 'characteristics')
-#         })
-#     )
-# @admin.register(Type)
-# class TypeAdmin(admin.ModelAdmin):
-#     list_display = ('title', 'category', 'display_brand')
-#     fields = ['title', ('category', 'display_brand')]
-#
