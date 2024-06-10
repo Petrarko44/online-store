@@ -27,7 +27,7 @@ class GoodsAdmin(admin.ModelAdmin):
         (None, {
             'fields': ('title', 'category', 'brand', 'vendor_code', 'price')
         }),
-        ('Полное описание', {
+        ('Full description', {
             'fields': ('description', 'characteristics')
         })
     )
