@@ -1,7 +1,6 @@
 from django.db import models
+from django.conf import settings
 from django.utils.text import slugify
-from users.models import NewUser
-
 
 
 class Category(models.Model):
@@ -26,7 +25,7 @@ class Brand(models.Model):
         return self.title
 
     def display_brand(self):
-        return ', '.join([ brand.title for brand in self.brand.all()[:3] ])
+        return ', '.join([brand.title for brand in self.brand.all()[:3]])
 
     display_brand.short_description = 'brand'
 
@@ -57,25 +56,25 @@ class Type(models.Model):
         return self.title
 
     def display_brand(self):
-        return ', '.join([ brand.title for brand in self.brand.all()[:3] ])
+        return ', '.join([brand.title for brand in self.brand.all()[:3]])
 
     display_brand.short_description = 'brand'
 
 
 class Goods(models.Model):
     title = models.CharField(max_length=150, unique=True, verbose_name='Название')
-    # slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
     category = models.ForeignKey(Type, on_delete=models.CASCADE, verbose_name='Категория', related_name='type')
     vendor_code = models.CharField(max_length=150, blank=True, null=True, verbose_name='Артикул')
-    # image = models.ImageField(blank=True, null=True, verbose_name='Изображение')
     description = models.TextField(blank=True, null=True, verbose_name='Описание')
-    characteristics = models.TextField(blank=True, null=True, verbose_name='Характеристики') #можно замутить класс характеристики
+    characteristics = models.TextField(
+        blank=True, null=True, verbose_name='Характеристики',
+    )  # можно замутить класс характеристики
     reviews = models.TextField(blank=True, null=True, verbose_name='Отзывы')
     price = models.DecimalField(default=0.00, max_digits=7, decimal_places=2, verbose_name='Цена')
     discount = models.DecimalField(default=0.00, max_digits=4, decimal_places=2, verbose_name='Скидка в %')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE, null=True, verbose_name='Бренд')
-    user = models.ForeignKey(NewUser, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, verbose_name='Пользователь')
 
     class Meta:
         verbose_name = 'Товар'
@@ -86,14 +85,13 @@ class Goods(models.Model):
 
     def sell_price(self):
         if self.discount:
-            return round(self.price - self.price*self.discount/100, 2)
+            return round(self.price - self.price * self.discount / 100, 2)
         return self.price
 
     def status_availability(self):
         if self.quantity >= 1:
             return f'В наличии.'
         return f'Нет в наличии.'
-
 
 # class Spinning(Goods):
 #     # MATERIAL_TYPE = ['Углеволокно(карбон)', 'Стекловолокно', 'Композит']

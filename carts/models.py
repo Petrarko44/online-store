@@ -1,6 +1,6 @@
 from django.db import models
 from goods.models import Goods
-from users.models import NewUser
+from django.conf import settings
 
 
 class CartQuerySet(models.QuerySet):
@@ -14,9 +14,8 @@ class CartQuerySet(models.QuerySet):
         return 0
 
 
-
 class Cart(models.Model):
-    user = models.ForeignKey(NewUser, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Пользователь')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, verbose_name='Пользователь')
     product = models.ForeignKey(Goods, on_delete=models.CASCADE, verbose_name='Товар')
     quantity = models.PositiveSmallIntegerField(default=0, verbose_name='Количество')
     session_key = models.CharField(max_length=32, null=True, blank=True)
