@@ -1,7 +1,7 @@
 from django.db import models
-from goods.models import Goods
 from django.conf import settings
 
+from goods.models import Goods
 
 class CartQuerySet(models.QuerySet):
 
@@ -25,7 +25,7 @@ class Cart(models.Model):
         verbose_name = 'Cart'
         verbose_name_plural = 'Carts'
 
-    objects = CartQuerySet().as_manager
+    objects = CartQuerySet().as_manager()
 
     def products_price(self):
         return round(self.product.sell_price() * self.quantity, 2)
