@@ -22,13 +22,16 @@ class GoodsInline(admin.TabularInline):
 class GoodsAdmin(admin.ModelAdmin):
     empty_value_display = '-empty-'
     list_display = ('title', 'category', 'brand', 'vendor_code',)
-    list_filter = ('title', 'category', 'vendor_code', 'price')
+    list_filter = ('title', 'category', 'vendor_code', 'price', 'brand', 'category')
     fieldsets = (
         (None, {
-            'fields': ('title', 'category', 'brand', 'vendor_code', 'price')
+            'fields': ('title', 'category', 'brand', 'vendor_code', 'quantity')
+        }),
+        ('Price', {
+            'fields': ('price', 'discount')
         }),
         ('Full description', {
-            'fields': ('description', 'characteristics')
+            'fields': ('description', 'characteristics', 'reviews')
         })
     )
 
@@ -37,6 +40,7 @@ class GoodsAdmin(admin.ModelAdmin):
 
 
 class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('title',)
     inlines = [SubcategoryInline,]
 
     class Meta:
@@ -44,6 +48,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class SubcategoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category',)
+    fields = ['title', 'category', 'brand']
     inlines = [TypeInline,]
 
     class Meta:

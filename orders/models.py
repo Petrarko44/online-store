@@ -32,7 +32,7 @@ class Order(models.Model):
     delivery_date = models.DateField()
     PAYMENT_METHOD = [
         ("Cash", "By cash"),
-        ("Card", "Bank card"),
+        ("Card", "By card"),
         ("Online", "Online payment"),
     ]
     payment = models.CharField(max_length=40, choices=PAYMENT_METHOD, verbose_name='Payment method')
@@ -50,7 +50,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name='Order')
     product = models.ForeignKey(Goods,on_delete=models.SET_DEFAULT, null=True, verbose_name='Product', default=None)
-    title = models.CharField(max_length=150, verbose_name='Name')
+    title = models.CharField(max_length=150, null=True, blank=True, verbose_name='Name')
     price = models.DecimalField(max_digits=7, decimal_places=2, verbose_name='Price')
     quantity = models.PositiveIntegerField(default=0, verbose_name='Quantity')
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Date of sale')
