@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from rest_framework import viewsets
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication, TokenAuthentication
 from django_filters.rest_framework import DjangoFilterBackend
 
 from carts.serializers import CartSerializer
@@ -17,4 +17,4 @@ class CartViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = CartFilter
     permission_classes = (IsAdminUser,)
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
+    authentication_classes = [SessionAuthentication, TokenAuthentication, BasicAuthentication]
