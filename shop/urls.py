@@ -25,5 +25,5 @@ urlpatterns = [
     path('', include('orders.urls')),    
     path('api/v1/drf-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/v1/auth/', include('djoser.urls')),
-    re_path(r'^auth/', include('djoser.urls.authtoken')),
+    re_path(r'^api/v1/auth/', include('djoser.urls.authtoken')),
 ]

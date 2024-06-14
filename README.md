@@ -25,3 +25,44 @@ Run the server:
 ```shell
 python manage.py runserver
 ```
+## Endpoints ##
+
+```http request
+
+        'auth'/
+        POST: 'token/login/'        
+        POST: 'users/'                      | list users
+        PUT/PATCH/DELETE: 'users/me/'       | update/delete auth user
+        
+
+        'goods/' 
+        GET: 'goods'                        | get all products
+        POST: 'goods'                       | create new product
+        GET/PATCH/DELETE: 'goods/{id}'      | get/change a product
+        GET: 'type'                         | get all types
+        POST: 'type'                        | create new type
+        GET/PATCH/DELETE:  'type/{id}'      | get/change a type
+        GET: 'category'                     | get all categories
+        POST: 'category'                    | create new category
+        GET/PATCH/DELETE:  'category/{id}'  | get/change a category
+        GET: 'subcategory'                  | get all subcategories
+        POST: subcategory'                  | create new subcategory
+        GET/PATCH/DELETE: 'subcategory/{id}'| get/change a subcategory
+        GET: 'brand'                        | get all brands
+        POST: 'brand'                       | create new brand
+        GET/PATCH/DELETE: 'brand/{id}'      | get/change a brand
+
+        'orders/'
+        GET: 'orders'                       | get all orders
+        POST: 'orders'                      | create new order
+        GET/PATCH/DELETE:  'orders/{id}'    | get/change a order
+        GET: 'orders_item'                  | get all orders item
+        POST: 'orders_item'                 | create new order item
+        GET/PATCH/DELETE: 'orders_item/{id}'| get/change a order item
+
+        'carts/'
+        GET: 'cart'                         | get all carts
+        POST: 'cart'                        | create new cart
+        GET/PATCH/DELETE: 'cart/{id}'       | get/change a cart
+        
+        
