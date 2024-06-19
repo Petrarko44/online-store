@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -92,9 +91,3 @@ class Goods(models.Model):
         if self.quantity >= 1:
             return f'available.'
         return f'Not available.'
-
-# class Spinning(Goods):
-#     # MATERIAL_TYPE = ['Углеволокно(карбон)', 'Стекловолокно', 'Композит']
-#     # material = models.TextChoices(blank=True, null=True, choices=MATERIAL_TYPE, verbose_name='Материал')
-#     material = models.TextChoices('Тип материала', 'Углеволокно(карбон), Стекловолокно, Композит')
-#     length = models.PositiveIntegerField(verbose_name='Длина')

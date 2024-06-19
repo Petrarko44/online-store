@@ -2,8 +2,6 @@ from django.contrib import admin
 from goods.models import Category, Subcategory, Type, Brand, Goods
 
 
-
-
 class SubcategoryInline(admin.StackedInline):
     model = Subcategory
     extra = 1
@@ -72,6 +70,7 @@ class BrandAdmin(admin.ModelAdmin):
 
     class Meta:
         model = Brand
+
 
 admin.site.register(Subcategory, SubcategoryAdmin)
 admin.site.register(Goods, GoodsAdmin)
