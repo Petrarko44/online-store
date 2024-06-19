@@ -1,5 +1,5 @@
 from django.contrib import admin
-from goods.models import Category, Subcategory, Type, Brand, Product
+from goods.models import Category, Subcategory, Type, Brand, Product, Review
 
 
 class SubcategoryInline(admin.StackedInline):
@@ -70,9 +70,14 @@ class BrandAdmin(admin.ModelAdmin):
     class Meta:
         model = Brand
 
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = ('name', 'user', 'product', 'rating', 'comment',)
+    list_filter = ('name', 'user', 'product', 'rating', 'comment',)
+
 
 admin.site.register(Subcategory, SubcategoryAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Brand, BrandAdmin)
+admin.site.register(Review, ReviewAdmin)
