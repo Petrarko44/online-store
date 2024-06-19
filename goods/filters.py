@@ -1,6 +1,6 @@
 import django_filters
 from django_filters import rest_framework as filters
-from goods.models import Goods
+from goods.models import Product
 
 class GoodsFilter(filters.FilterSet):
     price__gt = django_filters.NumberFilter(field_name='price', lookup_expr='gt')
@@ -8,5 +8,5 @@ class GoodsFilter(filters.FilterSet):
 
     
     class Meta:
-        model = Goods
-        fields = ['price', 'brand', 'category', ]
+        model = Product
+        fields = ['price', 'brand', 'type', ]

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from goods.models import Category, Subcategory, Type, Brand, Goods
+from goods.models import Category, Subcategory, Type, Brand, Product
 
 
 class SubcategoryInline(admin.StackedInline):
@@ -12,33 +12,32 @@ class TypeInline(admin.StackedInline):
     extra = 1
 
 
-class GoodsInline(admin.TabularInline):
-    model = Goods
+class ProductInline(admin.TabularInline):
+    model = Product
     extra = 1
 
 
-class GoodsAdmin(admin.ModelAdmin):
-    empty_value_display = '-empty-'
-    list_display = ('title', 'category', 'brand', 'vendor_code',)
-    list_filter = ('title', 'category', 'vendor_code', 'price', 'brand', 'category')
+class ProductAdmin(admin.ModelAdmin):    
+    list_display = ('name', 'type', 'brand', 'vendor_code',)
+    list_filter = ('name', 'type', 'vendor_code', 'price', 'brand')
     fieldsets = (
         (None, {
-            'fields': ('title', 'category', 'brand', 'vendor_code', 'quantity')
+            'fields': ('name', 'type', 'brand', 'vendor_code', 'quantity')
         }),
         ('Price', {
             'fields': ('price', 'discount')
         }),
         ('Full description', {
-            'fields': ('description', 'characteristics', 'reviews')
+            'fields': ('description', 'characteristics')
         })
     )
 
     class Meta:
-        model = Goods
+        model = Product
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title',)
+    list_display = ('name',)
     inlines = [SubcategoryInline,]
 
     class Meta:
@@ -46,8 +45,8 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category',)
-    fields = ['title', 'category', 'brand']
+    list_display = ('name', 'category',)
+    fields = ['name', 'category']
     inlines = [TypeInline,]
 
     class Meta:
@@ -55,25 +54,25 @@ class SubcategoryAdmin(admin.ModelAdmin):
 
 
 class TypeAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category',)
-    fields = ['title', 'category',]
-    inlines = [GoodsInline, ]
+    list_display = ('name', 'subcategory',)
+    fields = ['name', 'subcategory',]
+    inlines = [ProductInline, ]
 
     class Meta:
         model = Type
 
 
 class BrandAdmin(admin.ModelAdmin):
-    list_display = ('title',)
-    fields = ['title',]
-    inlines = [GoodsInline, ]
+    list_display = ('name',)
+    fields = ['name',]
+    inlines = [ProductInline, ]
 
     class Meta:
         model = Brand
 
 
 admin.site.register(Subcategory, SubcategoryAdmin)
-admin.site.register(Goods, GoodsAdmin)
+admin.site.register(Product, ProductAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Type, TypeAdmin)
 admin.site.register(Brand, BrandAdmin)
