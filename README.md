@@ -31,7 +31,7 @@ python manage.py runserver
 
         'auth'/
         POST: 'token/login/'        
-        POST: 'users/'                      | list users
+        GET/POST: 'users/'                  | list users, create user
         PUT/PATCH/DELETE: 'users/me/'       | update/delete auth user
         
 
