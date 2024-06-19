@@ -1,5 +1,4 @@
 from django.urls import path, include
-from carts.views import CartViewSet
 from carts.routers import router_cart
 
 

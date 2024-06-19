@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from goods.models import Goods
+from goods.models import Product, BaseModel
 
 class CartQuerySet(models.QuerySet):
 
@@ -14,16 +14,14 @@ class CartQuerySet(models.QuerySet):
         return 0
 
 
-class Cart(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, )
-    product = models.ForeignKey(Goods, on_delete=models.CASCADE, )
+class Cart(BaseModel):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, )
     quantity = models.PositiveSmallIntegerField(default=0,)
     session_key = models.CharField(max_length=32, null=True, blank=True)
-    time_created = models.DateTimeField(auto_now_add=True,)
-
+    
     class Meta:
-        verbose_name = 'Cart'
-        verbose_name_plural = 'Carts'
+        verbose_name = 'cart'
+        verbose_name_plural = 'carts'
 
     objects = CartQuerySet().as_manager()
 
@@ -32,5 +30,5 @@ class Cart(models.Model):
 
     def __str__(self):
         if self.user:
-            return f'Cart {self.user.username} Product {self.product.title} Quantity {self.quantity} Total {self.products_price()}'
-        return f'Product {self.product.title} Quantity {self.quantity} Total {self.products_price()}'
+            return f'Cart {self.user.username} Product {self.product.name} Quantity {self.quantity} Total {self.products_price()}'
+        return f'Product {self.product.name} Quantity {self.quantity} Total {self.products_price()}'

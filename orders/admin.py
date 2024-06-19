@@ -8,8 +8,8 @@ class OrderItemInline(admin.StackedInline):
     
 
 class OrderItemAdmin(admin.ModelAdmin):
-    list_display = ('order', 'product', 'price', 'quantity', 'created_timestamp')
-    list_filter = ('order', 'product', 'price', 'quantity', 'created_timestamp')    
+    list_display = ('order', 'product', 'price', 'quantity', 'created_at')
+    list_filter = ('order', 'product', 'price', 'quantity', 'created_at')    
 
     class Meta:
         model = OrderItem
@@ -17,8 +17,8 @@ class OrderItemAdmin(admin.ModelAdmin):
 
 class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderItemInline,]
-    list_display = ('user', 'created_timestamp', 'phone_number', 'delivery', 'delivery_address', 'delivery_date', 'payment', 'is_paid', 'status')
-    list_filter = ('user', 'created_timestamp', 'phone_number', 'delivery', 'delivery_address', 'delivery_date', 'payment', 'is_paid', 'status')  
+    list_display = ('user', 'created_at', 'phone_number', 'delivery', 'delivery_address', 'delivery_date', 'payment', 'is_paid', 'status')
+    list_filter = ('user', 'created_at', 'phone_number', 'delivery', 'delivery_address', 'delivery_date', 'payment', 'is_paid', 'status')  
     fieldsets = (
         (None, {
             'fields': ('user', 'phone_number',)
