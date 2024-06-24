@@ -17,6 +17,8 @@ class BaseModel(models.Model):
 
 
 class Category(BaseModel):
+    parent_category = models.ForeignKey("goods.Category", on_delete=models.CASCADE, related_name='subcategories', null=True, blank=True)
+    
      
     class Meta:
         verbose_name = 'category'
@@ -41,30 +43,8 @@ class Brand(BaseModel):
     display_brand.short_description = 'brand'
 
 
-class Subcategory(BaseModel):
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    
-    class Meta:
-        verbose_name = 'subcategory'
-        verbose_name_plural = 'subcategories'
-
-    def __str__(self):
-        return self.name
-
-
-class Type(BaseModel):
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
-    
-    class Meta:
-        verbose_name = 'type'
-        verbose_name_plural = 'types'
-
-    def __str__(self):
-        return self.name
-      
-
 class Product(BaseModel):
-    type = models.ForeignKey(Type, on_delete=models.CASCADE, related_name='type')
+    type = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='type')
     vendor_code = models.CharField(max_length=150, blank=True, null=True, verbose_name='vendor code')
     description = models.TextField(blank=True, null=True)
     characteristics = models.TextField(blank=True, null=True)
