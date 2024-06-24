@@ -38,16 +38,10 @@ python manage.py runserver
         'goods/' 
         GET: 'goods'                        | get all products
         POST: 'goods'                       | create new product
-        GET/PATCH/DELETE: 'goods/{id}'      | get/change a product
-        GET: 'type'                         | get all types
-        POST: 'type'                        | create new type
-        GET/PATCH/DELETE:  'type/{id}'      | get/change a type
+        GET/PATCH/DELETE: 'goods/{id}'      | get/change a product       
         GET: 'category'                     | get all categories
         POST: 'category'                    | create new category
-        GET/PATCH/DELETE:  'category/{id}'  | get/change a category
-        GET: 'subcategory'                  | get all subcategories
-        POST: subcategory'                  | create new subcategory
-        GET/PATCH/DELETE: 'subcategory/{id}'| get/change a subcategory
+        GET/PATCH/DELETE:  'category/{id}'  | get/change a category        
         GET: 'brand'                        | get all brands
         POST: 'brand'                       | create new brand
         GET/PATCH/DELETE: 'brand/{id}'      | get/change a brand
